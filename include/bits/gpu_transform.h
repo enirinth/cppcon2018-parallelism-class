@@ -28,19 +28,20 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
                        ContiguousIt first, ContiguousIt last,
                        ContiguousIt d_first, UnaryOperation unary_op) {
   /* implement me */
+  using namespace cl::sycl;
 
-  cl::sycl::default_selector selector;
-  cl::sycl::queue kernelQueue(selector);
+  default_selector selector;
+  queue kernelQueue(selector);
 
   using value_type = typename ContiguousIt::value_type;
   auto dataSize = std::distance(first, last);
 
-  cl::sycl::buffer<value_type, 1> inputBuf{first, cl::sycl::range<1>{dataSize}};
-  cl::sycl::buffer<value_type, 1> outputBuf{d_first, cl::sycl::range<1>{dataSize}};
+  buffer<value_type, 1> inputBuf{first, range<1>{dataSize}};
+  buffer<value_type, 1> outputBuf{d_first, range<1>{dataSize}};
 
-  kernelQueue.submit([&](cl::sycl::handler &cgh) {
-    auto inputAccessor = inputBuf.get_access<cl::sycl::access::mode::read>(cgh);
-    auto outputAccessor = outputBuf.get_access<cl::sycl::access::mode::write>(cgh);
+  kernelQueue.submit([&](handler &cgh) {
+    auto inputAccessor = inputBuf.get_access<access::mode::read>(cgh);
+    auto outputAccessor = outputBuf.get_access<access::mode::write>(cgh);
 
     cgh.parallel_for<class simple_test>(
       range<1>{dataSize},
