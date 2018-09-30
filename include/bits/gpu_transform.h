@@ -48,7 +48,7 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
       [=](id<1> idx){
         outputAccessor[idx] = unary_op(inputAccessor[idx]);
       }
-    )
+    );
     
   });
 
