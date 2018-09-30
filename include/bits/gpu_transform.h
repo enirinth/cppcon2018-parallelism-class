@@ -51,7 +51,7 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
     
   });
 
-  kernelQueue.wait()
+  kernelQueue.wait();
 
 
 
