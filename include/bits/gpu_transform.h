@@ -38,7 +38,6 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
   size_t dataSize = std::distance(first, last);
 
   buffer<value_type, 1> inBuf{first, last};
-  inBuf.set_final_data(nullptr);
   buffer<value_type, 1> outBuf{d_first, d_first + dataSize};
 
   kernelQueue.submit([&](handler &cgh) {
@@ -52,7 +51,7 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
     
   });
 
-
+  kernelQueue.wait();
 
   return d_first;
 }
