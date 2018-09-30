@@ -23,7 +23,7 @@ limitations under the License.
 
 namespace cppcon {
 
-class simple_test;
+class aaron_test;
 
 template <class ContiguousIt, class UnaryOperation, typename KernelName>
 ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
@@ -44,11 +44,9 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
     auto inputAccessor = inputBuf.get_access<access::mode::read>(cgh);
     auto outputAccessor = outputBuf.get_access<access::mode::write>(cgh);
 
-    cgh.parallel_for<simple_test>(
+    cgh.parallel_for<aaron_test>(
       range<1>{dataSize},
-      [=](id<1> idx){
-        outputAccessor[idx] = unary_op(inputAccessor[idx]);
-      }
+      [=](id<1> idx){outputAccessor[idx] = unary_op(inputAccessor[idx]);}
     );
     
   });
