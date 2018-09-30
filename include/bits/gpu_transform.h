@@ -35,8 +35,8 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
   using value_type = typename ContiguousIt::value_type;
   auto dataSize = std::distance(first, last);
 
-  cl::sycl::buffer<value_type, 1> inputBuf{first, range<1>{dataSize}};
-  cl::sycl::buffer<value_type, 1> outputBuf{d_first, range<1>{dataSize}};
+  cl::sycl::buffer<value_type, 1> inputBuf{first, cl::sycl::range<1>{dataSize}};
+  cl::sycl::buffer<value_type, 1> outputBuf{d_first, cl::sycl::range<1>{dataSize}};
 
   kernelQueue.submit([&](handler &cgh) {
     auto inputAccessor = inputBuf.get_access<access::mode::read>(cgh);
