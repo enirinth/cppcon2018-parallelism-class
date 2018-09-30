@@ -42,7 +42,7 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
 
   kernelQueue.submit([&](handler &cgh) {
     auto inputAccessor = inBuf. template get_access<access::mode::read>(cgh);
-    auto outputAccessor = outBuf. template get_access<access::mode::write>(cgh);
+    auto outputAccessor = outBuf. template get_access<access::mode::discard_write>(cgh);
 
     cgh.parallel_for<aaron_test>(
       range<1>{dataSize},
