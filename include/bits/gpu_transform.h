@@ -20,6 +20,7 @@ limitations under the License.
 #include <bits/sycl_policy.h>
 #include <CL/sycl.hpp>
 #include <iterator>
+#include <cassert>
 
 namespace cppcon {
 
@@ -38,8 +39,10 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
   size_t dataSize = std::distance(first, last);
 
   buffer<value_type, 1> inBuf{first, last};
+
   auto d_last = d_first;
   std::advance(d_last, dataSize);
+  assert(d_first != d_last);
   buffer<value_type, 1> outBuf{d_first, d_last};
 
   kernelQueue.submit([&](handler &cgh) {
