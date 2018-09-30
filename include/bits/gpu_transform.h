@@ -39,7 +39,7 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
   buffer<value_type, 1> inputBuf{first, last};
   buffer<value_type, 1> outputBuf{d_first, d_first + dataSize};
 
-  kernelQueue.submit([&](handler &cgh) {
+  kernelQueue.submit([&](handler &cgh, this) {
     auto inputAccessor = inputBuf.get_access<access::mode::read>(cgh);
     auto outputAccessor = outputBuf.get_access<access::mode::write>(cgh);
 
