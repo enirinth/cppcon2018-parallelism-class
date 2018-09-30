@@ -34,7 +34,7 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
   queue kernelQueue(selector);
 
   using value_type = typename ContiguousIt::value_type;
-  auto dataSize = std::distance(first, last);
+  size_t dataSize = std::distance(first, last);
 
   buffer<value_type, 1> inputBuf{first, range<1>{dataSize}};
   buffer<value_type, 1> outputBuf{d_first, range<1>{dataSize}};
