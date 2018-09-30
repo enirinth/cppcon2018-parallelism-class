@@ -31,11 +31,10 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
                        ContiguousIt d_first, UnaryOperation unary_op) {
   /* implement me */
   using namespace cl::sycl;
-
-  default_selector selector;
-  queue kernelQueue(selector);
-
   using value_type = typename ContiguousIt::value_type;
+
+  queue kernelQueue;
+
   size_t dataSize = std::distance(first, last);
 
   buffer<value_type, 1> inputBuf{first, last};
