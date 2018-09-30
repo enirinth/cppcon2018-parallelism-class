@@ -37,12 +37,12 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
 
   size_t dataSize = std::distance(first, last);
 
-  buffer<value_type, 1> inputBuf{first, last};
-  buffer<value_type, 1> outputBuf{d_first, d_first + dataSize};
+  buffer<value_type, 1> inBuf{first, last};
+  buffer<value_type, 1> outBuf{d_first, d_first + dataSize};
 
   kernelQueue.submit([&](handler &cgh) {
-    auto inputAccessor = inputBuf.get_access<access::mode::read>(cgh);
-    auto outputAccessor = outputBuf.get_access<access::mode::write>(cgh);
+    auto inputAccessor = inBuf.get_access<access::mode::read>(cgh);
+    auto outputAccessor = outBuf.get_access<access::mode::write>(cgh);
 
     cgh.parallel_for<aaron_test>(
       range<1>{dataSize},
