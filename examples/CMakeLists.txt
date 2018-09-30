@@ -74,7 +74,7 @@ add_example(sequential_transform_reduce)
 
 add_example(parallel_transform)
 add_example(parallel_reduce)
-add_example(parallel_transform_reduce)
+#add_example(parallel_transform_reduce)
 
 if (${CPPCON_SYCL_EXAMPLES})
   add_sycl_example(gpu_transform)
