@@ -32,7 +32,7 @@ ContiguousIt transform(sycl_execution_policy_t<KernelName> policy,
   cl::sycl::default_selector selector;
   cl::sycl::queue kernelQueue(selector);
 
-  using value_type = ContiguousIt::value_type;
+  using value_type = typename ContiguousIt::value_type;
   auto dataSize = std::distance(first, last);
 
   cl::sycl::buffer<value_type, 1> inputBuf{first, range<1>{dataSize}};
