@@ -77,7 +77,7 @@ add_example(parallel_reduce)
 #add_example(parallel_transform_reduce)
 
 if (${CPPCON_SYCL_EXAMPLES})
-  add_sycl_example(gpu_transform)
+  #add_sycl_example(gpu_transform)
   add_sycl_example(gpu_reduce)
   add_sycl_example(gpu_transform_reduce)
 endif()
